@@ -11,6 +11,7 @@ import {
   tagNames,
   variants
 } from "../constants";
+import Input from "../Input";
 
 export default function InputPresenter(props) {
   const {
