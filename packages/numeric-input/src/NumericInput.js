@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { cx } from "emotion";
 import Input from "@hig/input";
+import IconButton from "@hig/icon-button";
+import { CaretUp16, CaretDown16 } from "@hig/icons";
 
 import customStylesheet from "./customStylesheet";
 
@@ -23,44 +25,88 @@ export default class NumericInput extends Component {
      */
     onInput: PropTypes.func,
     /**
+     * Adds custom/overriding styles
+     */
+    stylesheet: PropTypes.func,
+    /**
      * The visual variant of the numeric input
      */
     variant: PropTypes.oneOf(variantTypes),
     /**
-     * Adds custom/overriding styles
+     * Initial value of the number
      */
-    stylesheet: PropTypes.func
+    value: PropTypes.number
   };
 
   static defaultProps = {
     variant: "line"
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: props.value
+    };
+  }
+
   render() {
-    const { variant, stylesheet, ...otherProps } = this.props;
+    const { variant, stylesheet, placeholder, ...otherProps } = this.props;
     const { className } = otherProps;
-    const textareaClassName =
+    const inputClassName =
       className &&
       className
         .split(" ")
-        .reduce((acc, cur) => cx(acc, `${cur.trim()}-textarea`), "");
+        .reduce((acc, cur) => cx(acc, `${cur.trim()}-numericinput`), "");
 
-    const textareaStylesheet = (styles, props, themeData) => {
-      const textareaStyles = customStylesheet(styles, props, themeData);
+    const numericInputStylesheet = (styles, props, themeData) => {
+      const numericInputStyles = customStylesheet(styles, props, themeData);
       return stylesheet
-        ? stylesheet(textareaStyles, props, themeData)
-        : textareaStyles;
+        ? stylesheet(numericInputStyles, props, themeData)
+        : numericInputStyles;
     };
 
+    const increaseValue = () => {
+      // If the value is not undefined
+      if (this.state.value) {
+        this.setState({ value: parseFloat(this.state.value) + 1 });
+      } else {
+        this.setState({ value: 1 });
+      }
+    }
+
+    const decreaseValue = () => {
+       // If the value is not undefined
+      if (this.state.value) {
+        this.setState({ value: parseFloat(this.state.value) - 1 });
+      } else {
+        this.setState({ value: -1 });
+      }
+    }
+
     return (
-      <div style={{ position: "relative" }} className={className}>
+      <div>
+        <IconButton
+          className="up-arrow"
+          icon={<CaretUp16 />}
+          onClick={() => increaseValue()}
+          title="Down"
+        />
+        <IconButton
+          className="down-arrow"
+          icon={<CaretDown16 />}
+          onClick={() => decreaseValue()}
+          title="Up"
+        />
         <Input
           {...otherProps}
-          className={textareaClassName}
-          stylesheet={textareaStylesheet}
+          className={inputClassName}
+          placeholder={placeholder}
+          stylesheet={numericInputStylesheet}
           tagName="input"
           type="number"
           variant={variant}
+          value={this.state.value}
         />
       </div>
     );

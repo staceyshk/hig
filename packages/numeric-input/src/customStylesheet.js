@@ -1,26 +1,29 @@
 export default function stylesheetOverride(stylesheet, props, themeData) {
-  const borderStyles =
-    props.variant === `line`
-      ? themeData[`input.textArea.line.borderColor`]
-      : themeData[`input.box.default.borderColor`];
-  const textArea = {
+  const numericInput = {
     ...stylesheet.input,
-    display: `block`,
-    resize: `vertical`,
-    padding: `${themeData["input.paddingVertical"]}
-      ${themeData["input.box.paddingHorizontal"]}`,
-    height: `calc((${themeData["input.minHeight"]} - 2px) * 2)`
+    // Safari chrome
+    "::-webkit-inner-spin-button": {
+      display: `none`
+    },
+    // IE
+    "::-ms-clear": {
+      display: `none`
+    },
+    // Firefox
+    ":focus": {
+      MozAppearance: `textfield`
+    },
+    ":hover": {
+      MozAppearance: `textfield`
+    },
+    MozAppearance: `textfield`
   };
   return {
     ...stylesheet,
     wrapper: {
-      ...stylesheet.wrapper,
-      borderLeftColor: borderStyles,
-      borderRightColor: borderStyles,
-      borderTopColor: borderStyles,
-      position: `static`
+      ...stylesheet.wrapper
     },
-    input: textArea,
+    input: numericInput,
     halo: {
       ...stylesheet.halo,
       width: `100%`,

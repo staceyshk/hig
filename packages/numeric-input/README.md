@@ -15,15 +15,13 @@ yarn add @hig/numeric-input @hig/theme-context @hig/theme-data
 ### Import the component
 
 ```js
-import NumericInpout from '@hig/numeric-input';
+import NumericInput from '@hig/numeric-input';
 ```
 
 ## Basic usage
 
 ```jsx
-<NumericInpout
-  placeholder="1"
-/>
+<import NumericInput from '@hig/numeric-input' />
 ```
 ## Custom CSS
 
