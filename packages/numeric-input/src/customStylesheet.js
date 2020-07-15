@@ -16,7 +16,8 @@ export default function stylesheetOverride(stylesheet, props, themeData) {
     ":hover": {
       MozAppearance: `textfield`
     },
-    MozAppearance: `textfield`
+    MozAppearance: `textfield`,
+    display: "inline-block"
   };
   return {
     ...stylesheet,
@@ -29,6 +30,12 @@ export default function stylesheetOverride(stylesheet, props, themeData) {
       width: `100%`,
       left: 0,
       top: `100%`
+    },
+    upArrow: {
+      position: `absolute`,
+      right: `35px`,
+      top: `103px`,
+      zIndex: `1`
     }
   };
 }

@@ -7,11 +7,16 @@ const knobGroupIds = {
 };
 
 const knobLabels = {
+  value: "Value",
+  step: "Step",
   disabled: "Disabled",
-  variant: "variant",
-  onBlur: "onBlur",
+  error: "Error",
   onChange: "onChange",
-  onFocus: "onFocus"
+  onFocus: "onFocus",
+  onBlur: "onBlur",
+  onMouseEnter: "onMouseEnter",
+  onMouseLeave: "onMouseLeave",
+  variant: "variant"
 };
 
 const variantOptions = {

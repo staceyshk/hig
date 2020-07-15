@@ -21,7 +21,7 @@ import NumericInput from '@hig/numeric-input';
 ## Basic usage
 
 ```jsx
-<import NumericInput from '@hig/numeric-input' />
+<NumericInput />
 ```
 ## Custom CSS
 
